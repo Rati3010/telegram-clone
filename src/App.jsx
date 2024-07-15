@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoSearchOutline } from "react-icons/io5";
+import "./App.css";
+import Menubar from "./components/Menubar";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  // Close the menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.menu-bar') && !event.target.closest('.hamburger-icon')) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className={isDarkMode ? "dark-mode" : "light-mode"}>
+      <div style={{ display: "flex", justifyContent: 'space-between' }}>
+        <RxHamburgerMenu className="hamburger-icon" style={{ width: '30px', height: "30px" }} onClick={toggleMenu} />
+        <IoSearchOutline style={{ width: '30px', height: "30px" }} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <Menubar isOpen={isMenuOpen} closeMenu={closeMenu} toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+    </div>
+  );
 }
 
-export default App
+export default App;
