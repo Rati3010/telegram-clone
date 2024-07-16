@@ -1,19 +1,47 @@
 .light-mode {
-  width: 100vw;
-  height: 100vh;
   background-color: white;
   color: black;
 }
 
 .dark-mode {
-  width: 100vw;
-  height: 100vh;
   background-color: black;
   color: white;
+}
+
+.theme-transition {
+  transition: background-color 1s, color 1s;
 }
 
 .hamburger-icon {
   cursor: pointer;
 }
 
+.menu-bar {
+  background-color: inherit; /* Inherit the background color from the parent */
+  color: inherit; /* Inherit the text color from the parent */
+}
 
+/* Additional styles to ensure proper theming */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+.profile{
+  background-color: rgb(27, 138, 138);
+  padding: 20px;
+}
+.profile-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-bottom{
+  padding: 20px;
+}
+.profile-bottom > div{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}

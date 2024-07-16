@@ -3,6 +3,12 @@ import { IoIosSunny } from "react-icons/io";
 import { FaMoon } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import profileImg from '../assets/profile2.jpg';
+import { FaRegCircleUser } from "react-icons/fa6";
+import { AiOutlineTeam, AiOutlineUser, AiOutlineQuestionCircle } from "react-icons/ai";
+import { MdOutlineCall } from "react-icons/md";
+import { VscPerson } from "react-icons/vsc";
+import { CiBookmark } from "react-icons/ci";
+import { IoSettingsOutline, IoPersonAddOutline } from "react-icons/io5";
 
 const Menubar = ({ isOpen, closeMenu, toggleTheme, isDarkMode }) => {
   const [startX, setStartX] = useState(null);
@@ -58,7 +64,7 @@ const Menubar = ({ isOpen, closeMenu, toggleTheme, isDarkMode }) => {
     } else {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
-    }
+    };
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
@@ -77,11 +83,10 @@ const Menubar = ({ isOpen, closeMenu, toggleTheme, isDarkMode }) => {
 
   return (
     <div
-      className="menu-bar"
+      className={`menu-bar ${isDarkMode ? 'dark-mode' : 'light-mode'}`}
       style={{
         height: '100vh',
         width: '70vw',
-        backgroundColor: 'gray',
         position: 'fixed',
         top: 0,
         left: `${getLeftPosition()}px`,
@@ -93,7 +98,7 @@ const Menubar = ({ isOpen, closeMenu, toggleTheme, isDarkMode }) => {
       onTouchEnd={handleTouchEnd}
       onMouseDown={handleMouseDown}
     >
-      <div>
+      <div className='profile'>
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
           <img src={profileImg} alt="profile_photo" style={{ height: '70px', width: '70px', borderRadius: "50%" }} />
           {isDarkMode ? (
@@ -102,14 +107,52 @@ const Menubar = ({ isOpen, closeMenu, toggleTheme, isDarkMode }) => {
             <FaMoon style={{ width: "30px", height: '30px', cursor: 'pointer' }} onClick={toggleTheme} />
           )}
         </div>
-        <div>
+        <div className='profile-details'>
           <div>
-            <p>Ratikanta Mohanta</p>
+            <p>Aradhya Sahoo</p>
             <p>+91 1234567890</p>
           </div>
           <div>
-            <IoMdArrowDropdown />
+            <IoMdArrowDropdown  style={{width:'20px', height:'20px'}}/>
           </div>
+        </div>
+      </div>
+      <div className='profile-bottom' >
+        <div>
+          <FaRegCircleUser/>
+          <p>My Profile</p>
+        </div>
+        <div>
+        <AiOutlineTeam />
+        <p>New Group</p>
+        </div>
+        <div>
+          <AiOutlineUser/>
+          <p>Contacts</p>
+        </div>
+        <div>
+          <MdOutlineCall/>
+          <p>calls</p>
+        </div>
+        <div>
+          <VscPerson/>
+          <p>People Nearby</p>
+        </div>
+        <div>
+          <CiBookmark/>
+          <p>Saved Messages</p>
+        </div>
+        <div>
+          <IoSettingsOutline/>
+          <p>Seettings</p>
+        </div>
+        <div>
+          <IoPersonAddOutline/>
+          <p>Invite Friends</p>
+        </div>
+        <div>
+          <AiOutlineQuestionCircle/>
+          <p>Telegram Features</p>
         </div>
       </div>
     </div>
